@@ -1,7 +1,12 @@
 package sctec.enterprise.management.challenge.controller;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sctec.enterprise.management.challenge.model.Enterprise;
+import sctec.enterprise.management.challenge.service.EnterpriseService;
 
 import java.util.List;
 
@@ -10,26 +15,71 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class EnterpriseController {
 
-    @GetMapping("{id}")
-    public Enterprise getById(@PathVariable Integer id) {
-        return null;
+    @Autowired
+    private EnterpriseService service;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
+        try {
+            Enterprise enterprise = service.findById(id);
+            return ResponseEntity.ok(enterprise);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping
-    public Enterprise create(@RequestBody Enterprise enterprise) {
-        return null;
+    public ResponseEntity<?> create(@RequestBody Enterprise enterprise) {
+        try {
+            Enterprise saved = service.saveOrUpdate(enterprise);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    @DeleteMapping("{id}")
-    public void deleteById(@PathVariable Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Integer id) {
+        try {
+            service.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            // Se o erro for de integridade (vínculo), o status 409 Conflict é bem adequado
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    @PutMapping("{id}")
-    public void update(@RequestParam Enterprise enterprise) {
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody Enterprise enterprise) {
+        try {
+            // 1. Validar se o ID foi enviado, senão o findById vai dar erro
+            if (enterprise.getId() == null) {
+                return ResponseEntity.badRequest().body("ID do empreendimento é obrigatório para atualização.");
+            }
+
+            // 2. Busca o registro atual no banco
+            Enterprise enterpriseOld = service.findById(enterprise.getId());
+
+            // 3. Copia as propriedades (exceto o ID, que já é o mesmo)
+            BeanUtils.copyProperties(enterprise, enterpriseOld, "id");
+
+            // 4. Salva a entidade atualizada
+            Enterprise updated = service.saveOrUpdate(enterpriseOld);
+
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            // Captura o "não encontrado" que vem do Service
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/all")
-    public List<Enterprise> getAll() {
-        return null;
+    public ResponseEntity<?> getAll() {
+        try {
+            List<Enterprise> list = service.findAll();
+            return ResponseEntity.ok(list);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao listar empreendimentos.");
+        }
     }
 }
