@@ -5,8 +5,9 @@ import sctec.enterprise.management.challenge.model.enums.Segment;
 
 import java.util.Objects;
 
+@Entity
 public class Enterprise {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(length = 100, nullable = false)

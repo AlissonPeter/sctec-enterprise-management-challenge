@@ -10,6 +10,9 @@ import sctec.enterprise.management.challenge.service.EnterpriseService;
 
 import java.util.List;
 
+/**
+ * REST API EnterpriseController class
+ */
 @RestController
 @RequestMapping("/enterprises")
 @CrossOrigin(origins = "*")
@@ -18,6 +21,11 @@ public class EnterpriseController {
     @Autowired
     private EnterpriseService service;
 
+    /**
+     * Return Enterprise by Id
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Integer id) {
         try {
@@ -28,6 +36,11 @@ public class EnterpriseController {
         }
     }
 
+    /**
+     * Save new Enterprise
+     * @param enterprise
+     * @return
+     */
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Enterprise enterprise) {
         try {
@@ -38,6 +51,11 @@ public class EnterpriseController {
         }
     }
 
+    /**
+     * Delete Enterprise by Id
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id) {
         try {
@@ -49,6 +67,11 @@ public class EnterpriseController {
         }
     }
 
+    /**
+     * Update Enterprise existing in the DB
+     * @param enterprise
+     * @return
+     */
     @PutMapping
     public ResponseEntity<?> update(@RequestBody Enterprise enterprise) {
         try {
@@ -73,6 +96,10 @@ public class EnterpriseController {
         }
     }
 
+    /**
+     * returns all enterprises registered in the DB.
+     * @return
+     */
     @GetMapping("/all")
     public ResponseEntity<?> getAll() {
         try {

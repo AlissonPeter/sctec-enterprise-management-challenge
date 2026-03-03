@@ -2,12 +2,14 @@ package sctec.enterprise.management.challenge.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sctec.enterprise.management.challenge.model.Enterprise;
 import sctec.enterprise.management.challenge.repository.EnterpriseRepository;
 
 import java.util.List;
 
+@Service
 public class EnterpriseService {
 
     @Autowired
@@ -21,7 +23,7 @@ public class EnterpriseService {
     @Transactional(readOnly = true)
     public Enterprise findById(Integer id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("enterprise not found"));
+                .orElseThrow(() -> new RuntimeException("Empreendimento não encontrado."));
     }
 
     /**
