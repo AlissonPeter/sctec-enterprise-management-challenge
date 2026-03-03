@@ -11,9 +11,18 @@ Desafio técnico SCTEC para a vaga de no curso de API para DEVs (API Rest - JAVA
 * **H2 Database** (Banco em memória para testes rápidos)
 * **Maven** (Gerenciador de dependências)
 
-## 🚀 Como Rodar o Projeto
+## 🚀 Como Executar o Projeto
 1. Clone o repositório: `git clone https://github.com/AlissonPeter/sctec-enterprise-management-challenge.git`
-2. Na pasta raiz, execute: `mvn spring-boot:run`
+
+2. Este projeto utiliza o **Maven Wrapper**, o que permite rodar a aplicação sem a necessidade de ter o Maven instalado globalmente na máquina.
+No terminal (dentro da pasta raiz do projeto), utilize o comando correspondente ao seu sistema:
+
+- **Windows (Prompt de Comando ou PowerShell):**
+  `mvnw clean spring-boot:run`
+  
+- **Linux, macOS ou Git Bash:**
+  `./mvnw clean spring-boot:run`
+  
 3. A API estará disponível em: `http://localhost:8080`
 
 ## 📑 Principais Endpoints
