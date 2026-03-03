@@ -1,6 +1,6 @@
 # Enterprise Management Challenge - SCTEC
 
-Desafio técnico SCTEC para a vaga de no curso de API para DEVs (API Rest - JAVA back-end)
+Desafio técnico SCTEC para o processo seletivo no curso de API para DEVs (API Rest - JAVA back-end)
 
 ## 🎥 Demonstração (Vídeo)
 [LINK DO VÍDEO PÚBLICO NO GOOGLE DRIVE](https://drive.google.com/file/d/1-3Kw33EWdKQPuYKsg85BJdut-2VknA_M/view?usp=drive_link)
