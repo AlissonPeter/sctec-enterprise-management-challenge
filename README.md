@@ -3,7 +3,7 @@
 Desafio técnico SCTEC para a vaga de no curso de API para DEVs (API Rest - JAVA back-end)
 
 ## 🎥 Demonstração (Vídeo)
-[LINK DO VÍDEO PÚBLICO NO GOOGLE DRIVE]()
+[LINK DO VÍDEO PÚBLICO NO GOOGLE DRIVE](https://drive.google.com/file/d/1-3Kw33EWdKQPuYKsg85BJdut-2VknA_M/view?usp=drive_link)
 
 ## 🛠️ Tecnologias Utilizadas
 * **Java 17** & **Spring Boot 4.0.3**
